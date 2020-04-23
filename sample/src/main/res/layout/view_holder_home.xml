@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/view_holder_home"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/view_holder_home_text_view_item"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/live_blog_spacings_sixteen"
+        android:textSize="@dimen/text_size_twenty_two" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/spacings_two"
+        android:background="@android:color/black" />
+
+</androidx.appcompat.widget.LinearLayoutCompat>

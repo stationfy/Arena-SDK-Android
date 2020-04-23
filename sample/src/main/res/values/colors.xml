@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="daisy_bush">#5B2B94</color>
+    <color name="daisy_bush_dark">#3E0B7A</color>
+    <color name="white_alpha">#7FFFFFFF</color>
+    <color name="dusty_gray">#9B9B9B</color>
+
+</resources>

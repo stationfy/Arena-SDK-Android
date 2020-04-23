@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="im.arena.sample">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <application
+        android:name=".SampleApplication"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/arena_sample_name"
+        android:roundIcon="@mipmap/ic_launcher"
+        android:theme="@style/AppTheme">
+
+        <activity android:name=".ActivityHome">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".liveblog.ActivityLiveBlog"
+            android:configChanges="orientation|screenSize|keyboardHidden" />
+
+        <activity android:name=".basiccard.ActivityBasicCard" />
+
+        <activity android:name=".golfcard.ActivityGolfCard" />
+
+        <activity android:name=".article.ActivityCardArticle" />
+
+        <activity android:name=".midiacard.ActivityCardMedia" />
+
+        <activity android:name=".social.ActivityCardSocial" />
+
+        <activity android:name=".pinnedcard.ActivityPinnedCard" />
+
+        <activity android:name=".summary.ActivitySummaryCard" />
+
+        <activity android:name=".service.ActivityServicePlayByPlay" />
+
+    </application>
+
+</manifest>

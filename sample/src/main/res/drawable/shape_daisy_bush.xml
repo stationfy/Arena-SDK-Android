@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <corners android:radius="@dimen/spacings_two" />
+
+    <solid android:color="@color/daisy_bush" />
+
+    <padding
+        android:bottom="@dimen/live_blog_spacings_four"
+        android:left="@dimen/spacings_ten"
+        android:right="@dimen/spacings_ten"
+        android:top="@dimen/live_blog_spacings_four" />
+</shape>

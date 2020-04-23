@@ -1,0 +1,2 @@
+rootProject.name = 'ArenaSdk'
+include ':sample'

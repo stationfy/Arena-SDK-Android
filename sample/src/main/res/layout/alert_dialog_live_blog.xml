@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/alert_dialog_live_blog_content_root"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/alert_dialog_live_blog_edit_text_publish_slug"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/alert_dialog_live_blog_publisher_slug"
+        android:textColor="@android:color/black"
+        android:textColorHint="@color/dusty_gray"
+        android:textSize="@dimen/text_size_twenty_two" />
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/alert_dialog_live_blog_edit_text_event_slug"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/live_blog_spacings_sixteen"
+        android:hint="@string/alert_dialog_live_blog_event_slug"
+        android:textColor="@android:color/black"
+        android:textColorHint="@color/dusty_gray"
+        android:textSize="@dimen/text_size_twenty_two" />
+
+</androidx.appcompat.widget.LinearLayoutCompat>
+

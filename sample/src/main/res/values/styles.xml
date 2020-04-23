@@ -1,0 +1,11 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.MaterialComponents.Light.DarkActionBar">
+        <item name="colorPrimary">@color/daisy_bush</item>
+        <item name="colorPrimaryDark">@color/daisy_bush_dark</item>
+        <item name="colorAccent">@color/daisy_bush</item>
+    </style>
+
+
+</resources>
