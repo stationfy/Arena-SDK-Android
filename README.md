@@ -70,7 +70,7 @@ Installing the Live Blog SDK is simple if you’re familiar with using external 
 
 ```groovy
 repositories {
-    maven { url "" }
+    mavenCentral()
 }
 
 dependencies {
@@ -93,10 +93,11 @@ Initialization links the SDK to the Android context, allowing you to respond to 
 The LiveBlog.setup() method must be called once across your Android client app. It is recommended to initialize the in the onCreate() method of the Application instance.
 
 ```kotlin
-LiveBlog.setup(APPLICATION, APPLICATION_ID, ENVIRONMENT)
+LiveBlog.configure(APPLICATION, APPLICATION_ID, VERSION, ENVIRONMENT)
 ```
 *  `APPLICATION`: Base class for maintaining global application state.
 *  `APPLICATION_ID`: Application identifier
+*  `VERSION`: Application version name
 *  `ENVIROMENT`: Execution environment of sdk, `PRODUCTION` being the default
 
 
@@ -133,7 +134,7 @@ Installing the Analytics SDK is simple if you’re familiar with using external 
 
 ```groovy
 repositories {
-    maven { url "" }
+    mavenCentral()
 }
 
 dependencies {
@@ -145,6 +146,8 @@ dependencies {
 When you build your APK with minifyEnabled true, add the following line to the module's ProGuard rules file.
 ```gradle
 -keep class im.arena.analytics.** { *; }
+-keep class im.arena.commons.** { *; }
+-keep class com.google.firebase.iid.** { *; }
 ```
 
 
@@ -152,10 +155,15 @@ When you build your APK with minifyEnabled true, add the following line to the m
 The `Analytics.configure(application, writeKey, environment)` method must be called once across your Android client app. It is recommended to initialize the in the onCreate() method of the Application instance.
 
 ```kotlin
-Streaming.setup(APPLICATION, APPLICATION_ID, ENVIRONMENT)
+Analytics
+    .widgetId(WIDGET_ID)
+    .widgetType(WIDGET_TYPE)
+    .configure(APPLICATION, WRITE_KEY, ENVIROMENT)
 ```
 
 *  `APPLICATION`: Base class for maintaining global application state.
+*  `WIDGET_ID`: ID of the widget `eventInfo.key` 
+*  `WIDGET_TYPE`: Name of the widget, example: `LIVE_BLOG`
 *  `WRITE_KEY`: The write key is the one used to initialize the SDK and will be provided by Arena team
 *  `ENVIROMENT`: Execution environment of sdk, `PRODUCTION` being the default
 
@@ -233,7 +241,7 @@ Installing the Streaming SDK is simple if you’re familiar with using external 
 
 ```groovy
 repositories {
-    maven { url "" }
+    mavenCentral()
 }
 
 dependencies {
@@ -253,10 +261,11 @@ Initialization links the SDK to the Android context, allowing you to respond to 
 The Streaming.setup() method must be called once across your Android client app. It is recommended to initialize the in the onCreate() method of the Application instance.
 
 ```kotlin
-Streaming.setup(APPLICATION, APPLICATION_ID, ENVIRONMENT)
+Streaming.setup(APPLICATION, APPLICATION_ID, VERSION, ENVIRONMENT)
 ```
 *  `APPLICATION`: Base class for maintaining global application state.
 *  `APPLICATION_ID`: Application identifier
+*  `VERSION`: Application version name
 *  `ENVIROMENT`: Execution environment of sdk, `PRODUCTION` being the default
 
 
