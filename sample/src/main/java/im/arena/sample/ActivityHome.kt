@@ -6,6 +6,7 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.recyclerview.widget.LinearLayoutManager
+import im.arena.sample.analytics.ActivityAnalytics
 import im.arena.sample.article.ActivityCardArticle
 import im.arena.sample.basiccard.ActivityBasicCard
 import im.arena.sample.golfcard.ActivityGolfCard
@@ -50,6 +51,7 @@ class ActivityHome : AppCompatActivity(), AdapterHome.OnClickListener {
             "Article Card",
             "Media Card",
             "Social Card",
+            "Analytics",
             "Service Play By Play"
         )
 
@@ -126,7 +128,9 @@ class ActivityHome : AppCompatActivity(), AdapterHome.OnClickListener {
 
             13 -> startActivity(Intent(this, ActivityCardSocial::class.java))
 
-            14 -> startActivity(Intent(this, ActivityServicePlayByPlay::class.java))
+            14 -> startActivity(Intent(this, ActivityAnalytics::class.java))
+
+            15 -> startActivity(Intent(this, ActivityServicePlayByPlay::class.java))
         }
     }
 

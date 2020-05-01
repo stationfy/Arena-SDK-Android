@@ -23,6 +23,6 @@ class ViewHolderHome(
     }
 
     override fun onClick(view: View?) {
-        onClickListener.click(view, adapterPosition)
+        onClickListener.click(view, bindingAdapterPosition)
     }
 }

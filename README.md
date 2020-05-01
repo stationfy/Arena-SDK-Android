@@ -1,11 +1,11 @@
-# Arena Android SDK
+# Arena Android SDK [![Build Status](https://app.bitrise.io/app/c35ffcea29b2e8a6/status.svg?token=rvvsR_ZUm7c2qOh4Vd58iw&branch=develop)](https://app.bitrise.io/app/c35ffcea29b2e8a6)
 Integrate live blog, analytics and streaming services into your Android client applications with speed and efficiency. Our Android SDK helps you focus on the client's implementation of booting, configuring live blog and sending events.
 
 - [Requirements](#requirements)
 - [Sample](#sample)
 - [LiveBlog](#liveblog)
+- [Analytics](#analytics)
 - [Streaming](#streaming)
-- [Change Log](#changelog)
 - [Getting Help](#help)
 - [License](#license)
 
@@ -66,7 +66,7 @@ Ask your account manager for your publisher slug
 
 #### Step 2: Install the Live Blog SDK
 
-Installing the Chat SDK is simple if you’re familiar with using external libraries or SDKs. To install the Chat SDK using `Gradle`, add the following lines to a `build.gradle` file at the app level.
+Installing the Live Blog SDK is simple if you’re familiar with using external libraries or SDKs. To install the Live Blog SDK using `Gradle`, add the following lines to a `build.gradle` file at the app level.
 
 ```groovy
 repositories {
@@ -74,7 +74,7 @@ repositories {
 }
 
 dependencies {
-    implementation 'im.arena:liveblog:1.0.0'
+    implementation 'im.arena:liveblog:1.2.0'
 }
 ````
 
@@ -82,6 +82,8 @@ dependencies {
 When you build your APK with minifyEnabled true, add the following line to the module's ProGuard rules file.
 ```gradle
 -keep class im.arena.liveblog.** { *; }
+-keep class im.arena.analytics.** { *; }
+-keep class im.arena.commons.** { *; }
 -keep class im.arena.streaming.** { *; }
 ```
 
@@ -119,6 +121,106 @@ live_blog.start(PUBLISH_SLUG, EVENT_SLUG, LIFECYCLE_OWNER, CLICK_LISTENER)
 *  `CLICK_LISTENER`: Interface definition for a callback to be invoked when a view is clicked.
 
 
+<a name="analytics"></a>
+# Analytics
+
+Analytics helps you measure your users, product, and business. It unlocks insights into your app's funnel, core business metrics, and whether you have product-market fit.
+
+
+#### Step 1: Install the Analytics SDK
+
+Installing the Analytics SDK is simple if you’re familiar with using external libraries or SDKs. To install the Analytics SDK using `Gradle`, add the following lines to a `build.gradle` file at the app level.
+
+```groovy
+repositories {
+    maven { url "" }
+}
+
+dependencies {
+    implementation 'im.arena:analytics:1.2.0'
+}
+````
+
+#### Step 2: Configure ProGuard to shrink code and resources
+When you build your APK with minifyEnabled true, add the following line to the module's ProGuard rules file.
+```gradle
+-keep class im.arena.analytics.** { *; }
+```
+
+
+#### Step 3 : Setup SDK
+The `Analytics.configure(application, writeKey, environment)` method must be called once across your Android client app. It is recommended to initialize the in the onCreate() method of the Application instance.
+
+```kotlin
+Streaming.setup(APPLICATION, APPLICATION_ID, ENVIRONMENT)
+```
+
+*  `APPLICATION`: Base class for maintaining global application state.
+*  `WRITE_KEY`: The write key is the one used to initialize the SDK and will be provided by Arena team
+*  `ENVIROMENT`: Execution environment of sdk, `PRODUCTION` being the default
+
+
+The analysis service offers some types of metrics:
+
+
+
+###### TRACK
+The `track()` call is how you record any actions your users perform, along with any properties that describe the action.
+
+Each action is known as an event. Each event has a name, like Subscribed, and properties, for example a Subscribed  event might have properties like plan or couponCode 
+
+```kotlin
+Analytics.instance().track("Post Reacted", 
+        hashMapOf<String, String>().apply {
+            put("postId", "WOR06DvfpcRaylQJoZe")
+            put("reaction", "thumbs_up")
+})
+```
+
+*  `EVENT`: The name of the event
+*  `PROPERTIES`: Additional properties that can be sent together with the event
+
+
+
+###### PAGE
+The `page()` call is how you register the screens that your users see, along with the properties that describe the action.
+
+```kotlin 
+Analytics.instance().page("Home", 
+        hashMapOf<String, String>().apply {
+            put("postId", "WOR06DvfpcRaylQJoZeu")
+            put("reaction", "thumbs_up")
+})
+```
+
+*  `SCREEN`: The name of the screen that was viewed
+*  `PROPERTIES`: Additional properties that can be sent together with the event
+
+
+
+###### IDENTIFY
+`identify()` lets you tie a user to their actions and record traits about them. It includes a unique User ID and any optional traits you know about them like their email, name, etc.
+
+We recommend to call identify in these situations:
+
+- After a user registers or log in
+- When a user updates their info
+- After loading a page that is accessible by a logged in user
+
+```kotlin 
+Analytics.instance().identify("43564gfdrtysdg34234", 
+        hashMapOf<String, String>().apply {
+            put("name", "John Doe")
+            put("email", "john@nocompany.com")
+            put("plan", "business")
+})
+```
+
+*  `SCREEN`: The name of the screen that was viewed
+*  `PROPERTIES`: Additional properties that can be sent together with the event
+
+
+
 <a name="streaming"></a>
 # Streaming
 
@@ -127,7 +229,7 @@ Using this mode you're controlling how the date will be displayed entirely on yo
 
 #### Step 1: Install the Streaming SDK
 
-Installing the Chat SDK is simple if you’re familiar with using external libraries or SDKs. To install the Chat SDK using `Gradle`, add the following lines to a `build.gradle` file at the app level.
+Installing the Streaming SDK is simple if you’re familiar with using external libraries or SDKs. To install the Streaming SDK using `Gradle`, add the following lines to a `build.gradle` file at the app level.
 
 ```groovy
 repositories {
@@ -135,7 +237,7 @@ repositories {
 }
 
 dependencies {
-    implementation 'im.arena:streaming:1.0.0'
+    implementation 'im.arena:streaming:1.0.1'
 }
 ````
 
@@ -212,12 +314,6 @@ Streaming.playByPlay.query(EVENT_KEY, PRIORITY, ORDER_BY, PER_PAGE, QUERY_INFO)
 *  `QUERY_INFO`: The type of query to be performed. We currently only offer `PLAY_BY_PLAY`
 
 Returns a `Query` object containing the information needed to perform a real-time or just a single query
-
-<a name="changelog"></a>
-# Changelog
-
-see [Releases](CHANGELOG.md)
-
 
 <a name="help"></a>
 # Help

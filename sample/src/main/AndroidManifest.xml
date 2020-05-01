@@ -36,6 +36,8 @@
 
         <activity android:name=".summary.ActivitySummaryCard" />
 
+        <activity android:name=".analytics.ActivityAnalytics" />
+
         <activity android:name=".service.ActivityServicePlayByPlay" />
 
     </application>

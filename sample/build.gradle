@@ -49,4 +49,5 @@ dependencies {
     implementation rootProject.androidDependencies.material
     implementation rootProject.androidDependencies.multidex
     implementation rootProject.androidDependencies.liveblog
+    implementation rootProject.androidDependencies.analytics
 }
