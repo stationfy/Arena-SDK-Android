@@ -6,10 +6,10 @@ import android.widget.Toast
 import android.widget.Toast.makeText
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
+import im.arena.realtimedata.RealTimeData
 import im.arena.sample.R
 import im.arena.sample.liveblog.ActivityLiveBlog.Companion.EVENT_SLUG_GENERAL
 import im.arena.sample.liveblog.ActivityLiveBlog.Companion.PUBLISHER_SLUG
-import im.arena.streaming.Streaming
 import kotlinx.android.synthetic.main.activity_service_play_by_play.*
 
 class ActivityServicePlayByPlay : AppCompatActivity() {
@@ -28,8 +28,9 @@ class ActivityServicePlayByPlay : AppCompatActivity() {
     }
 
     private fun loadCache() {
-        Streaming
-            .cache
+        RealTimeData
+            .instance()
+            .cached
             .load(PUBLISHER_SLUG, EVENT_SLUG_GENERAL,
                 {
                     loadStreaming(it.eventInfo?.key)
@@ -41,7 +42,8 @@ class ActivityServicePlayByPlay : AppCompatActivity() {
     }
 
     private fun loadStreaming(eventId: String?) {
-        Streaming
+        RealTimeData
+            .instance()
             .playByPlay
             .apply {
                 realtime(

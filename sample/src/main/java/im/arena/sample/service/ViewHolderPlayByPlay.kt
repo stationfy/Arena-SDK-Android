@@ -3,7 +3,7 @@ package im.arena.sample.service
 import android.view.View
 import androidx.core.text.HtmlCompat
 import androidx.recyclerview.widget.RecyclerView
-import im.arena.streaming.model.Posts
+import im.arena.realtimedata.model.Posts
 import kotlinx.android.synthetic.main.view_holder_service_play_by_play.view.*
 
 class ViewHolderPlayByPlay(view: View) : RecyclerView.ViewHolder(view) {

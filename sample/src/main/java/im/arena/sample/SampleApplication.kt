@@ -12,16 +12,7 @@ class SampleApplication : Application() {
     override fun onCreate() {
         super.onCreate()
 
-        LiveBlog.configure(
-            this,
-            BuildConfig.APPLICATION_ID,
-            BuildConfig.VERSION_NAME,
-            im.arena.streaming.Environment.DEVELOPMENT
-        )
-
-        Analytics
-            .widgetId("-L5sDkM-c1vZjTt4UOT4")
-            .widgetType("Liveblog")
-            .configure(this, WRITE_KEY, im.arena.analytics.AnalyticsEnvironment.PRODUCTION)
+        Analytics.configure(this, WRITE_KEY)
+        LiveBlog.configure(this)
     }
 }

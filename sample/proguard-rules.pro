@@ -1,6 +1,6 @@
 ## Live Blog
 -keep class im.arena.liveblog.** { *; }
--keep class im.arena.streaming.** { *; }
+-keep class im.arena.realtimedata.** { *; }
 -keep class im.arena.commons.** { *; }
 -keep class im.arena.player.** { *; }
 -keep class im.arena.basiccard.** { *; }

@@ -46,7 +46,43 @@
       "client_info": {
         "mobilesdk_app_id": "1:562157265951:android:dfc4c67cb9f9329250612a",
         "android_client_info": {
-          "package_name": "com.arena.streaming"
+          "package_name": "com.arena.realtimedata"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "562157265951-5c7dh085b8rmh3cfsvcc28igsm2heb0q.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAc0DjhHVksS_9GiKVDIwNnGVK_85KGPdc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "562157265951-5c7dh085b8rmh3cfsvcc28igsm2heb0q.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "562157265951-lhs20vd14mhtafki8m02oucoetjhg03m.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.arenaapp.PublisherDev"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:562157265951:android:dfc4c67cb9f9329250612a",
+        "android_client_info": {
+          "package_name": "com.arena.analytics"
         }
       },
       "oauth_client": [

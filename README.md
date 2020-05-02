@@ -1,11 +1,11 @@
 # Arena Android SDK [![Build Status](https://app.bitrise.io/app/c35ffcea29b2e8a6/status.svg?token=rvvsR_ZUm7c2qOh4Vd58iw&branch=develop)](https://app.bitrise.io/app/c35ffcea29b2e8a6)
-Integrate live blog, analytics and streaming services into your Android client applications with speed and efficiency. Our Android SDK helps you focus on the client's implementation of booting, configuring live blog and sending events.
+Integrate live blog, analytics and real time data services into your Android client applications with speed and efficiency. Our Android SDK helps you focus on the client's implementation of booting, configuring live blog and sending events.
 
 - [Requirements](#requirements)
 - [Sample](#sample)
 - [LiveBlog](#liveblog)
 - [Analytics](#analytics)
-- [Streaming](#streaming)
+- [RealTimeData](#realtimedata)
 - [Getting Help](#help)
 - [License](#license)
 
@@ -74,7 +74,7 @@ repositories {
 }
 
 dependencies {
-    implementation 'im.arena:liveblog:1.2.0'
+    implementation 'im.arena:liveblog:1.5.0'
 }
 ````
 
@@ -84,7 +84,7 @@ When you build your APK with minifyEnabled true, add the following line to the m
 -keep class im.arena.liveblog.** { *; }
 -keep class im.arena.analytics.** { *; }
 -keep class im.arena.commons.** { *; }
--keep class im.arena.streaming.** { *; }
+-keep class im.arena.realtimedata.** { *; }
 ```
 
 
@@ -138,7 +138,7 @@ repositories {
 }
 
 dependencies {
-    implementation 'im.arena:analytics:1.2.0'
+    implementation 'im.arena:analytics:1.7.0'
 }
 ````
 
@@ -155,17 +155,11 @@ When you build your APK with minifyEnabled true, add the following line to the m
 The `Analytics.configure(application, writeKey, environment)` method must be called once across your Android client app. It is recommended to initialize the in the onCreate() method of the Application instance.
 
 ```kotlin
-Analytics
-    .widgetId(WIDGET_ID)
-    .widgetType(WIDGET_TYPE)
-    .configure(APPLICATION, WRITE_KEY, ENVIROMENT)
+Analytics.configure(APPLICATION, WRITE_KEY)
 ```
 
 *  `APPLICATION`: Base class for maintaining global application state.
-*  `WIDGET_ID`: ID of the widget `eventInfo.key` 
-*  `WIDGET_TYPE`: Name of the widget, example: `LIVE_BLOG`
 *  `WRITE_KEY`: The write key is the one used to initialize the SDK and will be provided by Arena team
-*  `ENVIROMENT`: Execution environment of sdk, `PRODUCTION` being the default
 
 
 The analysis service offers some types of metrics:
@@ -224,20 +218,20 @@ Analytics.instance().identify("43564gfdrtysdg34234",
 })
 ```
 
-*  `SCREEN`: The name of the screen that was viewed
-*  `PROPERTIES`: Additional properties that can be sent together with the event
+*  `USER_ID`: Unique User ID
+*  `TRAITS`: Optional traits you know about them like their email, name, etc.
 
 
 
-<a name="streaming"></a>
-# Streaming
+<a name="realtimedata"></a>
+# RealTimeData
 
 Using this mode you're controlling how the date will be displayed entirely on your side, we will provide a data stream with all information.
 
 
-#### Step 1: Install the Streaming SDK
+#### Step 1: Install the RealTimeData SDK
 
-Installing the Streaming SDK is simple if you’re familiar with using external libraries or SDKs. To install the Streaming SDK using `Gradle`, add the following lines to a `build.gradle` file at the app level.
+Installing the RealTimeData SDK is simple if you’re familiar with using external libraries or SDKs. To install the RealTimeData SDK using `Gradle`, add the following lines to a `build.gradle` file at the app level.
 
 ```groovy
 repositories {
@@ -245,37 +239,33 @@ repositories {
 }
 
 dependencies {
-    implementation 'im.arena:streaming:1.0.1'
+    implementation 'im.arena:realtimedata:1.3.0'
 }
 ````
 
 #### Step 2: Configure ProGuard to shrink code and resources
 When you build your APK with minifyEnabled true, add the following line to the module's ProGuard rules file.
 ```gradle
--keep class im.arena.streaming.** { *; }
+-keep class im.arena.realtimedata.** { *; }
 ```
 
 
 #### Step 3 : Setup SDK
 Initialization links the SDK to the Android context, allowing you to respond to connection and status changes.
-The Streaming.setup() method must be called once across your Android client app. It is recommended to initialize the in the onCreate() method of the Application instance.
+The RealTimeData.setup() method must be called once across your Android client app. It is recommended to initialize the in the onCreate() method of the Application instance.
 
 ```kotlin
-Streaming.setup(APPLICATION, APPLICATION_ID, VERSION, ENVIRONMENT)
+RealTimeData.configure(APPLICATION)
 ```
 *  `APPLICATION`: Base class for maintaining global application state.
-*  `APPLICATION_ID`: Application identifier
-*  `VERSION`: Application version name
-*  `ENVIROMENT`: Execution environment of sdk, `PRODUCTION` being the default
 
-
-The streaming service offers some alternatives for customers to consume data:
+The real time data service offers some alternatives for customers to consume data:
 
 ###### SNAPSHOTS
 Returns a list of raw data
 
 ```kotlin
- Streaming
+ RealTimeData
             .playByPlay
             .snapshots(
                 QUERY,
@@ -286,15 +276,15 @@ Returns a list of raw data
             )
 ```
 
-*  `QUERY`: Query to request the information provided through the method `Streaming.playByPlay.query(EVENT_KEY)`
+*  `QUERY`: Query to request the information provided through the method `RealTimeData.playByPlay.query(EVENT_KEY)`
 *  `PER_PAGE`: Number of items per page
 
 
 ###### REALTIME
-Real-time data streaming
+Real time data listener
 
 ```kotlin
-Streaming
+RealTimeData
     .playByPlay
     .realtime(QUERY,
         { success->
@@ -303,17 +293,17 @@ Streaming
         })
 ```
 
-*  `QUERY`: Query to request the information provided through the method `Streaming.playByPlay.query(EVENT_KEY)`
+*  `QUERY`: Query to request the information provided through the method `RealTimeData.playByPlay.query(EVENT_KEY)`
 *  `PER_PAGE`: Number of items per page
 
-The return of this call is the `ListenerRegistration` which can be used later to cancel the streaming stream by calling `listenerRegistration.remove()`
+The return of this call is the `ListenerRegistration` which can be used later to cancel the real time data stream by calling `listenerRegistration.remove()`
 
 
 ###### QUERY
 Build the query to retrieve the data.
 
 ```kotlin
-Streaming.playByPlay.query(EVENT_KEY, PRIORITY, ORDER_BY, PER_PAGE, QUERY_INFO)
+RealTimeData.playByPlay.query(EVENT_KEY, PRIORITY, ORDER_BY, PER_PAGE, QUERY_INFO)
 ```
 
 *  `EVENT_KEY`: Event identifier

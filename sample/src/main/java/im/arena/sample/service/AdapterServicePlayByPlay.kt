@@ -4,8 +4,8 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
+import im.arena.realtimedata.model.Posts
 import im.arena.sample.R
-import im.arena.streaming.model.Posts
 
 class AdapterServicePlayByPlay : ListAdapter<Posts, ViewHolderPlayByPlay>(object :
     DiffUtil.ItemCallback<Posts>() {
