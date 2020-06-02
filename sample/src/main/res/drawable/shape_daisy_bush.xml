@@ -6,8 +6,8 @@
     <solid android:color="@color/daisy_bush" />
 
     <padding
-        android:bottom="@dimen/live_blog_spacings_four"
+        android:bottom="@dimen/spacings_four"
         android:left="@dimen/spacings_ten"
         android:right="@dimen/spacings_ten"
-        android:top="@dimen/live_blog_spacings_four" />
+        android:top="@dimen/spacings_four" />
 </shape>

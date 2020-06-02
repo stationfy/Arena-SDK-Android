@@ -48,6 +48,10 @@ dependencies {
     implementation rootProject.androidDependencies.kotlin
     implementation rootProject.androidDependencies.material
     implementation rootProject.androidDependencies.multidex
-    implementation rootProject.androidDependencies.liveblog
+    implementation rootProject.androidDependencies.constraint
     implementation rootProject.androidDependencies.analytics
+    implementation rootProject.androidDependencies.liveblog
+    implementation rootProject.androidDependencies.pollcard
+    implementation rootProject.androidDependencies.basiccard
+    implementation rootProject.androidDependencies.realtimedata
 }

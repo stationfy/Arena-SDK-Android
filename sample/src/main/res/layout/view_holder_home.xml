@@ -9,7 +9,7 @@
         android:id="@+id/view_holder_home_text_view_item"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="@dimen/live_blog_spacings_sixteen"
+        android:padding="@dimen/spacings_sixteen"
         android:textSize="@dimen/text_size_twenty_two" />
 
     <View

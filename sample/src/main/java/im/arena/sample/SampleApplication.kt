@@ -3,6 +3,8 @@ package im.arena.sample
 import android.app.Application
 import im.arena.analytics.Analytics
 import im.arena.liveblog.LiveBlog
+import im.arena.realtimedata.Environment
+import im.arena.realtimedata.RealTimeData
 
 class SampleApplication : Application() {
     companion object {
@@ -12,6 +14,7 @@ class SampleApplication : Application() {
     override fun onCreate() {
         super.onCreate()
 
+        RealTimeData.configure(this, Environment.DEVELOPMENT)
         Analytics.configure(this, WRITE_KEY)
         LiveBlog.configure(this)
     }

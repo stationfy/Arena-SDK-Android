@@ -46,14 +46,13 @@ class ActivityServicePlayByPlay : AppCompatActivity() {
             .instance()
             .playByPlay
             .apply {
-                realtime(
-                    query(eventId),
-                    {
+                realtime(eventId,
+                    success = {
                         adapterServicePlayByPlay.submitList(it)
                         activity_service_play_by_play_progress.visibility = View.GONE
                         activity_service_play_by_play_recycler_view.visibility = View.VISIBLE
                     },
-                    {
+                    failure = {
                         makeText(baseContext, it.message, Toast.LENGTH_SHORT)
                             .show()
                     })

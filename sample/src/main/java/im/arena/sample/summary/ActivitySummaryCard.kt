@@ -13,7 +13,7 @@ class ActivitySummaryCard : AppCompatActivity() {
 
         summary_card
             .summaryTitle("Summary")
-            .icon("https://firebasestorage.googleapis.com/v0/b/arena-dev-f9045.appspot.com/o/images%2F4d393abb0e8bdeda2c787d56592c71f3.jpg?alt=media&token=a8951c60-d47a-4792-87ef-27380172505a")
+            .iconUrl("https://firebasestorage.googleapis.com/v0/b/arena-dev-f9045.appspot.com/o/images%2F4d393abb0e8bdeda2c787d56592c71f3.jpg?alt=media&token=a8951c60-d47a-4792-87ef-27380172505a")
             .playerPhoto("https://f.i.uol.com.br/fotografia/2020/02/22/15823911105e515f46b0011_1582391110_3x2_md.jpg")
             .playerTeam("https://upload.wikimedia.org/wikipedia/pt/thumb/4/43/FCBarcelona.svg/1200px-FCBarcelona.svg.png")
             .playerName("Messi")

@@ -5,14 +5,14 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:paddingTop="@dimen/live_blog_spacings_sixteen">
+    android:paddingTop="@dimen/spacings_sixteen">
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/view_holder_service_play_by_play_text_view_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/live_blog_spacings_sixteen"
-        android:layout_marginRight="@dimen/live_blog_spacings_sixteen"
+        android:layout_marginLeft="@dimen/spacings_sixteen"
+        android:layout_marginRight="@dimen/spacings_sixteen"
         android:textColor="@android:color/black"
         android:textSize="@dimen/text_size_twenty_two"
         tools:text="Title" />
@@ -21,8 +21,8 @@
         android:id="@+id/view_holder_service_play_by_play_text_view_description"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/live_blog_spacings_sixteen"
-        android:layout_marginRight="@dimen/live_blog_spacings_sixteen"
+        android:layout_marginLeft="@dimen/spacings_sixteen"
+        android:layout_marginRight="@dimen/spacings_sixteen"
         android:textColor="@android:color/black"
         android:textSize="@dimen/text_size_sixteen"
         tools:text="Descrption" />
@@ -30,7 +30,7 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="@dimen/spacings_two"
-        android:layout_marginTop="@dimen/live_blog_spacings_sixteen"
+        android:layout_marginTop="@dimen/spacings_sixteen"
         android:background="@android:color/black" />
 
 </androidx.appcompat.widget.LinearLayoutCompat>

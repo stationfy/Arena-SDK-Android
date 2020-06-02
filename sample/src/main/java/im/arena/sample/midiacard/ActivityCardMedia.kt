@@ -12,7 +12,7 @@ class ActivityCardMedia : AppCompatActivity() {
         setContentView(R.layout.activity_media_card)
 
         media_card
-            .icon("https://firebasestorage.googleapis.com/v0/b/arena-dev-f9045.appspot.com/o/images%2F4d393abb0e8bdeda2c787d56592c71f3.jpg?alt=media&token=a8951c60-d47a-4792-87ef-27380172505a")
+            .iconUrl("https://firebasestorage.googleapis.com/v0/b/arena-dev-f9045.appspot.com/o/images%2F4d393abb0e8bdeda2c787d56592c71f3.jpg?alt=media&token=a8951c60-d47a-4792-87ef-27380172505a")
             .title("Pegoou o goleiro")
             .mediaThumbnailUrl("https://stationfy.imgix.net/cm/5e80eef29929c500074fea13.jpeg")
             .mediaType("photo")

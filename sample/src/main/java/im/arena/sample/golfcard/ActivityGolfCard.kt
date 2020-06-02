@@ -11,7 +11,7 @@ class ActivityGolfCard : AppCompatActivity() {
         setContentView(R.layout.activity_golf_card)
 
         golf_card
-            .icon("https://firebasestorage.googleapis.com/v0/b/arena-prd.appspot.com/o/images%2F1f1a0be18270dde563bbc625e0270bcb.jpg?alt=media&token=7889aa13-53a2-49e3-862c-8e0d049a4498")
+            .iconUrl("https://firebasestorage.googleapis.com/v0/b/arena-prd.appspot.com/o/images%2F1f1a0be18270dde563bbc625e0270bcb.jpg?alt=media&token=7889aa13-53a2-49e3-862c-8e0d049a4498")
             .title("Title")
             .messageText("Description")
             .senderPhoto("https://firebasestorage.googleapis.com/v0/b/arena-dev-f9045.appspot.com/o/images%2F4d393abb0e8bdeda2c787d56592c71f3.jpg?alt=media&token=a8951c60-d47a-4792-87ef-27380172505a")
