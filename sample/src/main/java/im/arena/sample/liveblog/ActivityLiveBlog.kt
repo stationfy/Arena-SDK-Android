@@ -5,11 +5,11 @@ import android.view.View
 import android.widget.Toast
 import android.widget.Toast.makeText
 import androidx.appcompat.app.AppCompatActivity
-import im.arena.liveblog.LiveBlogAdapterBasicCard
+import im.arena.liveblog.LiveBlogCallback
 import im.arena.sample.R
 import kotlinx.android.synthetic.main.activity_live_blog.*
 
-class ActivityLiveBlog : AppCompatActivity(), LiveBlogAdapterBasicCard.OnItemClickListener {
+class ActivityLiveBlog : AppCompatActivity(), LiveBlogCallback {
     companion object {
         const val EXTRA_PUBLISHER_SLUG = "EXTRA_PUBLISHER_SLUG"
         const val EXTRA_EVENT_SLUG = "EXTRA_EVENT_SLUG"
@@ -36,7 +36,7 @@ class ActivityLiveBlog : AppCompatActivity(), LiveBlogAdapterBasicCard.OnItemCli
         )
     }
 
-    override fun onItemClick(view: View, position: Int) {
+    override fun onItemClick(view: View?, position: Int) {
         makeText(baseContext, "Click card!", Toast.LENGTH_LONG).show()
     }
 }
