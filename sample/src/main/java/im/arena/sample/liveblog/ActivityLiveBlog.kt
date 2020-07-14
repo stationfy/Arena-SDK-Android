@@ -2,8 +2,6 @@ package im.arena.sample.liveblog
 
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
-import android.widget.Toast.makeText
 import androidx.appcompat.app.AppCompatActivity
 import im.arena.liveblog.LiveBlogCallback
 import im.arena.sample.R
@@ -23,6 +21,7 @@ class ActivityLiveBlog : AppCompatActivity(), LiveBlogCallback {
         const val EVENT_SLUG_BASKETBALL = "wza0"
         const val EVENT_SLUG_MOTOSPORT = "m4iy"
         const val EVENT_SLUG_MIDIA = "cvz7"
+        const val EVENT_SLUG_SIMPLE_LIVE_SCORE = "gw5u"
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -37,6 +36,5 @@ class ActivityLiveBlog : AppCompatActivity(), LiveBlogCallback {
     }
 
     override fun onItemClick(view: View?, position: Int) {
-        makeText(baseContext, "Click card!", Toast.LENGTH_LONG).show()
     }
 }

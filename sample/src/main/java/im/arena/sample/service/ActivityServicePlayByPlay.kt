@@ -7,6 +7,7 @@ import android.widget.Toast.makeText
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import im.arena.realtimedata.RealTimeData
+import im.arena.realtimedata.model.OrderBy
 import im.arena.sample.R
 import im.arena.sample.liveblog.ActivityLiveBlog.Companion.EVENT_SLUG_GENERAL
 import im.arena.sample.liveblog.ActivityLiveBlog.Companion.PUBLISHER_SLUG
@@ -30,7 +31,7 @@ class ActivityServicePlayByPlay : AppCompatActivity() {
     private fun loadCache() {
         RealTimeData
             .instance()
-            .cached
+            .cachedRepository
             .load(PUBLISHER_SLUG, EVENT_SLUG_GENERAL,
                 {
                     loadStreaming(it.eventInfo?.key)
@@ -47,6 +48,7 @@ class ActivityServicePlayByPlay : AppCompatActivity() {
             .playByPlay
             .apply {
                 realtime(eventId,
+                    orderBy = OrderBy.NEWEST,
                     success = {
                         adapterServicePlayByPlay.submitList(it)
                         activity_service_play_by_play_progress.visibility = View.GONE

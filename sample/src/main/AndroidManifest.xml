@@ -22,19 +22,9 @@
             android:name=".liveblog.ActivityLiveBlog"
             android:configChanges="orientation|screenSize|keyboardHidden" />
 
-        <activity android:name=".basiccard.ActivityBasicCard" />
-
-        <activity android:name=".golfcard.ActivityGolfCard" />
-
-        <activity android:name=".article.ActivityCardArticle" />
-
-        <activity android:name=".midiacard.ActivityCardMedia" />
-
-        <activity android:name=".social.ActivityCardSocial" />
-
-        <activity android:name=".pinnedcard.ActivityPinnedCard" />
-
-        <activity android:name=".summary.ActivitySummaryCard" />
+        <activity
+            android:name=".liveblog.ActivityInputLiveBlog"
+            android:configChanges="orientation|screenSize|keyboardHidden" />
 
         <activity android:name=".analytics.ActivityAnalytics" />
 
