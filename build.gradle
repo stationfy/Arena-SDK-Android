@@ -39,15 +39,17 @@ ext {
     htmlVersion = '3.9'
     recyclerviewVersion = '1.2.0-alpha02'
     noplayerVersion = '4.5.4'
-    commonsVersion = '1.7.0'
-    analyticsVersion = '1.8.0'
-    pollcardVersion = '1.5.0'
-    headercardVersion = '1.4.0'
-    basiccardVersion = '1.5.0'
-    realtimedataVersion = '1.7.0'
-    profileVersion = '1.1.0'
-    playerVersion = '1.0.1'
-    liveblogVersion = '1.7.0'
+    commonsVersion = '1.12.1'
+    analyticsVersion = '1.10.0'
+    pollcardVersion = '1.8.0'
+    headerVersion = '1.10.0'
+    basiccardVersion = '1.11.0'
+    liveScoreVersion = '1.4.0'
+    realtimedataVersion = '1.17.0'
+    profileVersion = '1.2.0'
+    playerVersion = '1.1.0'
+    liveblogVersion = '1.13.0'
+    coroutinesVersion = '1.3.6'
 
     //Test
     jUnitVersion = '1.0.0'
@@ -66,28 +68,29 @@ ext {
     ]
 
     androidDependencies = [
-            kotlin      : "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlinVersion",
-            appCompat   : "androidx.appcompat:appcompat:$appCompatVersion",
-            material    : "com.google.android.material:material:$materialVersion",
-            constraint  : "androidx.constraintlayout:constraintlayout:$constraintVersion",
-            multidex    : "androidx.multidex:multidex:$multidexVersion",
-            html        : "org.sufficientlysecure:html-textview:$htmlVersion",
-            noplayer    : "com.novoda:no-player:$noplayerVersion",
-            recyclerview: "androidx.recyclerview:recyclerview:$recyclerviewVersion",
-            commons     : "im.arena:commons:$commonsVersion",
-            basiccard   : "im.arena:basiccard:$basiccardVersion",
-            headercard  : "im.arena:headercard:$headercardVersion",
-            pollcard    : "im.arena:pollcard:$pollcardVersion",
-            realtimedata: "im.arena:realtimedata:$realtimedataVersion",
-            profile     : "im.arena:profile:$profileVersion",
-            player      : "im.arena:player:$playerVersion",
-            liveblog    : "im.arena:liveblog:$liveblogVersion",
-            analytics   : "im.arena:analytics:$analyticsVersion",
-            firestore   : "com.google.firebase:firebase-firestore:$firestoreVersion",
-            firebaseIid : "com.google.firebase:firebase-iid:$firebaseIidVersion",
-            gson        : "com.squareup.retrofit2:converter-gson:$retrofitVersion",
+            kotlin       : "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlinVersion",
+            appCompat    : "androidx.appcompat:appcompat:$appCompatVersion",
+            material     : "com.google.android.material:material:$materialVersion",
+            constraint   : "androidx.constraintlayout:constraintlayout:$constraintVersion",
+            multidex     : "androidx.multidex:multidex:$multidexVersion",
+            html         : "org.sufficientlysecure:html-textview:$htmlVersion",
+            noplayer     : "com.novoda:no-player:$noplayerVersion",
+            recyclerview : "androidx.recyclerview:recyclerview:$recyclerviewVersion",
+            commons      : "im.arena:commons:$commonsVersion",
+            basiccard    : "im.arena:basiccard:$basiccardVersion",
+            header       : "im.arena:header:$headerVersion",
+            pollcard     : "im.arena:pollcard:$pollcardVersion",
+            livescorecard: "im.arena:livescorecard:$liveScoreVersion",
+            realtimedata : "im.arena:realtimedata:$realtimedataVersion",
+            profile      : "im.arena:profile:$profileVersion",
+            player       : "im.arena:player:$playerVersion",
+            liveblog     : "im.arena:liveblog:$liveblogVersion",
+            analytics    : "im.arena:analytics:$analyticsVersion",
+            firestore    : "com.google.firebase:firebase-firestore:$firestoreVersion",
+            firebaseIid  : "com.google.firebase:firebase-iid:$firebaseIidVersion",
+            gson         : "com.squareup.retrofit2:converter-gson:$retrofitVersion",
 
-            glide       : [
+            glide        : [
                     "com.github.bumptech.glide:glide:$glideVersion",
                     "com.squareup.okhttp3:okhttp:$okHttpVersion",
                     dependencies.create("com.github.bumptech.glide:okhttp-integration:$glideVersion") {
@@ -95,7 +98,13 @@ ext {
                     },
             ],
 
-            retrofit    : [
+            coroutine    : [
+                    "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesVersion",
+                    "org.jetbrains.kotlinx:kotlinx-coroutines-core-common:$coroutinesVersion",
+                    "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutinesVersion",
+            ],
+
+            retrofit     : [
                     "com.squareup.retrofit2:retrofit:$retrofitVersion",
                     "com.squareup.retrofit2:converter-gson:$retrofitVersion",
                     "com.squareup.okhttp3:okhttp:$okHttpVersion",

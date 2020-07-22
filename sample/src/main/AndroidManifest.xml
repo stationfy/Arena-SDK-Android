@@ -22,10 +22,6 @@
             android:name=".liveblog.ActivityLiveBlog"
             android:configChanges="orientation|screenSize|keyboardHidden" />
 
-        <activity
-            android:name=".liveblog.ActivityInputLiveBlog"
-            android:configChanges="orientation|screenSize|keyboardHidden" />
-
         <activity android:name=".analytics.ActivityAnalytics" />
 
         <activity android:name=".service.ActivityServicePlayByPlay" />

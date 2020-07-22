@@ -1,38 +1,55 @@
 package im.arena.sample.liveblog
 
+import android.content.DialogInterface
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.AppCompatEditText
+import im.arena.liveblog.LiveBlog
 import im.arena.liveblog.LiveBlogCallback
 import im.arena.sample.R
+import im.arena.sample.common.alertDialog
 import kotlinx.android.synthetic.main.activity_live_blog.*
 
+
 class ActivityLiveBlog : AppCompatActivity(), LiveBlogCallback {
-    companion object {
-        const val EXTRA_PUBLISHER_SLUG = "EXTRA_PUBLISHER_SLUG"
-        const val EXTRA_EVENT_SLUG = "EXTRA_EVENT_SLUG"
-
-        const val PUBLISHER_SLUG = "qa-sdk"
-
-        const val EVENT_SLUG_GENERAL = "buly"
-        const val EVENT_SLUG_GOLF = "fw8i"
-        const val EVENT_SLUG_SOCCER = "yjsv"
-        const val EVENT_SLUG_BASEBALL = "zrcz"
-        const val EVENT_SLUG_BASKETBALL = "wza0"
-        const val EVENT_SLUG_MOTOSPORT = "m4iy"
-        const val EVENT_SLUG_MIDIA = "cvz7"
-        const val EVENT_SLUG_SIMPLE_LIVE_SCORE = "gw5u"
-    }
+    private var alertDialogInput: AlertDialog? = null
+    private lateinit var alertDialogLayout: View
+    private lateinit var appCompatEditTextPublisherSlug: AppCompatEditText
+    private lateinit var appCompatEditTextEventSlug: AppCompatEditText
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_live_blog)
 
-        live_blog.start(
-            intent?.getStringExtra(EXTRA_PUBLISHER_SLUG) ?: "",
-            intent?.getStringExtra(EXTRA_EVENT_SLUG) ?: "",
-            this, this
-        )
+        alertDialogLayout =
+            LayoutInflater.from(baseContext).inflate(R.layout.alert_dialog_live_blog, null, false)
+        appCompatEditTextPublisherSlug =
+            alertDialogLayout.findViewById(R.id.alert_dialog_live_blog_edit_text_publish_slug)
+        appCompatEditTextEventSlug =
+            alertDialogLayout.findViewById(R.id.alert_dialog_live_blog_edit_text_event_slug)
+
+        showAlertDialogLiveBlog(live_blog)
+    }
+
+    private fun showAlertDialogLiveBlog(liveBlog: LiveBlog) {
+        alertDialogInput =
+            alertDialog(alertDialogLayout, DialogInterface.OnClickListener { dialogInterface, _ ->
+                liveBlog.start(
+                    appCompatEditTextPublisherSlug.text.toString(),
+                    appCompatEditTextEventSlug.text.toString(),
+                    this,
+                    this
+                )
+                dialogInterface.dismiss()
+            })
+    }
+
+    override fun onDestroy() {
+        alertDialogInput = null
+        super.onDestroy()
     }
 
     override fun onItemClick(view: View?, position: Int) {

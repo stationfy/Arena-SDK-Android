@@ -74,7 +74,7 @@ repositories {
 }
 
 dependencies {
-    implementation 'im.arena:liveblog:1.9.0'
+    implementation 'im.arena:liveblog:1.13.0'
 }
 ````
 
@@ -138,7 +138,7 @@ repositories {
 }
 
 dependencies {
-    implementation 'im.arena:analytics:1.8.0'
+    implementation 'im.arena:analytics:1.10.0'
 }
 ````
 
@@ -239,7 +239,7 @@ repositories {
 }
 
 dependencies {
-    implementation 'im.arena:realtimedata:1.9.0'
+    implementation 'im.arena:realtimedata:1.17.0'
 }
 ````
 

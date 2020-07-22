@@ -25,11 +25,9 @@ android {
         }
 
         release {
-            zipAlignEnabled true
-            minifyEnabled true
-            debuggable false
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-            consumerProguardFiles 'proguard-rules.pro'
+            zipAlignEnabled false
+            minifyEnabled false
+            debuggable true
         }
     }
 
@@ -52,8 +50,7 @@ dependencies {
     implementation rootProject.androidDependencies.analytics
     implementation rootProject.androidDependencies.pollcard
     implementation rootProject.androidDependencies.basiccard
+    implementation rootProject.androidDependencies.livescorecard
     implementation rootProject.androidDependencies.liveblog
     implementation rootProject.androidDependencies.realtimedata
-    implementation rootProject.androidDependencies.livescorecard
-
 }

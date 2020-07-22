@@ -9,11 +9,14 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import im.arena.realtimedata.RealTimeData
 import im.arena.realtimedata.model.OrderBy
 import im.arena.sample.R
-import im.arena.sample.liveblog.ActivityLiveBlog.Companion.EVENT_SLUG_GENERAL
-import im.arena.sample.liveblog.ActivityLiveBlog.Companion.PUBLISHER_SLUG
 import kotlinx.android.synthetic.main.activity_service_play_by_play.*
 
 class ActivityServicePlayByPlay : AppCompatActivity() {
+    companion object {
+        private const val PUBLISHER_SLUG = "qa-sdk"
+        private const val EVENT_SLUG_GENERAL = "buly"
+    }
+
     private val adapterServicePlayByPlay = AdapterServicePlayByPlay()
 
     override fun onCreate(savedInstanceState: Bundle?) {
