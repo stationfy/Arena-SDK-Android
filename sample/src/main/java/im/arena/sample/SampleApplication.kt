@@ -5,6 +5,7 @@ import im.arena.analytics.Analytics
 import im.arena.liveblog.LiveBlog
 import im.arena.realtimedata.Environment
 import im.arena.realtimedata.RealTimeData
+import im.arena.sample.BuildConfig.DEBUG
 
 class SampleApplication : Application() {
     companion object {
@@ -14,7 +15,7 @@ class SampleApplication : Application() {
     override fun onCreate() {
         super.onCreate()
 
-        RealTimeData.configure(this, Environment.DEVELOPMENT)
+        RealTimeData.configure(this, if (DEBUG) Environment.DEVELOPMENT else Environment.PRODUCTION)
         Analytics.configure(this, WRITE_KEY)
         LiveBlog.configure(this)
     }

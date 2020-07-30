@@ -1,5 +1,6 @@
 package im.arena.sample.service
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
@@ -31,11 +32,13 @@ class ActivityServicePlayByPlay : AppCompatActivity() {
         loadCache()
     }
 
+    @SuppressLint("CheckResult")
     private fun loadCache() {
         RealTimeData
             .instance()
             .cachedRepository
-            .load(PUBLISHER_SLUG, EVENT_SLUG_GENERAL,
+            .load(PUBLISHER_SLUG, EVENT_SLUG_GENERAL)
+            .subscribe(
                 {
                     loadStreaming(it.eventInfo?.key)
                 },
@@ -45,22 +48,25 @@ class ActivityServicePlayByPlay : AppCompatActivity() {
                 })
     }
 
+    @SuppressLint("CheckResult")
     private fun loadStreaming(eventId: String?) {
         RealTimeData
             .instance()
             .playByPlay
-            .apply {
-                realtime(eventId,
-                    orderBy = OrderBy.NEWEST,
-                    success = {
-                        adapterServicePlayByPlay.submitList(it)
-                        activity_service_play_by_play_progress.visibility = View.GONE
-                        activity_service_play_by_play_recycler_view.visibility = View.VISIBLE
-                    },
-                    failure = {
-                        makeText(baseContext, it.message, Toast.LENGTH_SHORT)
-                            .show()
-                    })
-            }
+            .realtime(
+                eventId,
+                OrderBy.NEWEST
+            )
+            .subscribe(
+                {
+                    adapterServicePlayByPlay.submitList(it)
+                    activity_service_play_by_play_progress.visibility = View.GONE
+                    activity_service_play_by_play_recycler_view.visibility = View.VISIBLE
+                },
+                {
+                    makeText(baseContext, it.message, Toast.LENGTH_SHORT)
+                        .show()
+                }
+            )
     }
 }

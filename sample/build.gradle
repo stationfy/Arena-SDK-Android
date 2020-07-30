@@ -17,14 +17,36 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
+    signingConfigs {
+        release {
+            storeFile file("../sample/keystore.jks")
+            keyAlias "androiddebugkey"
+            storePassword "android"
+            keyPassword  "android"
+        }
+
+        debug {
+            storeFile file("../sample/keystore.jks")
+            keyAlias "androiddebugkey"
+            storePassword "android"
+            keyPassword  "android"
+        }
+    }
+
     buildTypes {
         debug {
+            signingConfig signingConfigs.debug
+
             zipAlignEnabled false
             minifyEnabled false
             debuggable true
+
+            resValue "string", "project_id", "arena-im-dev"
         }
 
         release {
+            signingConfig signingConfigs.release
+
             zipAlignEnabled false
             minifyEnabled false
             debuggable true
@@ -48,9 +70,6 @@ dependencies {
     implementation rootProject.androidDependencies.multidex
     implementation rootProject.androidDependencies.constraint
     implementation rootProject.androidDependencies.analytics
-    implementation rootProject.androidDependencies.pollcard
-    implementation rootProject.androidDependencies.basiccard
-    implementation rootProject.androidDependencies.livescorecard
-    implementation rootProject.androidDependencies.liveblog
     implementation rootProject.androidDependencies.realtimedata
+    implementation rootProject.androidDependencies.liveblog
 }
