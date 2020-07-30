@@ -74,7 +74,7 @@ repositories {
 }
 
 dependencies {
-    implementation 'im.arena:liveblog:1.13.0'
+    implementation 'im.arena:liveblog:1.14.1'
 }
 ````
 
@@ -93,12 +93,9 @@ Initialization links the SDK to the Android context, allowing you to respond to 
 The LiveBlog.setup() method must be called once across your Android client app. It is recommended to initialize the in the onCreate() method of the Application instance.
 
 ```kotlin
-LiveBlog.configure(APPLICATION, APPLICATION_ID, VERSION, ENVIRONMENT)
+LiveBlog.configure(APPLICATION)
 ```
 *  `APPLICATION`: Base class for maintaining global application state.
-*  `APPLICATION_ID`: Application identifier
-*  `VERSION`: Application version name
-*  `ENVIROMENT`: Execution environment of sdk, `PRODUCTION` being the default
 
 
 #### Step 5: Start SDK
@@ -239,7 +236,7 @@ repositories {
 }
 
 dependencies {
-    implementation 'im.arena:realtimedata:1.17.0'
+    implementation 'im.arena:realtimedata:1.18.0'
 }
 ````
 
