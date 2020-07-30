@@ -49,7 +49,7 @@ android {
 
             zipAlignEnabled false
             minifyEnabled false
-            debuggable true
+            debuggable false
         }
     }
 
