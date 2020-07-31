@@ -7,9 +7,12 @@ import android.widget.Toast
 import android.widget.Toast.makeText
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
+import im.arena.commons.LogLevel
+import im.arena.realtimedata.Environment
 import im.arena.realtimedata.RealTimeData
 import im.arena.realtimedata.model.OrderBy
 import im.arena.sample.R
+import im.arena.sample.SampleApplication
 import kotlinx.android.synthetic.main.activity_service_play_by_play.*
 
 class ActivityServicePlayByPlay : AppCompatActivity() {
@@ -23,6 +26,9 @@ class ActivityServicePlayByPlay : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_service_play_by_play)
+        RealTimeData
+            .logLevel(LogLevel.DEBUG)
+            .configure(SampleApplication.instance, Environment.PRODUCTION)
 
         activity_service_play_by_play_recycler_view.apply {
             layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)

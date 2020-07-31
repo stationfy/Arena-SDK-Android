@@ -3,14 +3,23 @@ package im.arena.sample.analytics
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import im.arena.analytics.Analytics
+import im.arena.analytics.Environment
+import im.arena.commons.LogLevel
 import im.arena.sample.R
+import im.arena.sample.SampleApplication
 import kotlinx.android.synthetic.main.activity_analytics.*
 
 class ActivityAnalytics : AppCompatActivity() {
+    companion object {
+        private const val WRITE_KEY = "NWU3MjNhMTgwMDE3YmMwMDA3YzgyYTI0Om1vYmlsZTpkZWZhdWx0"
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_analytics)
+        Analytics
+            .logLevel(LogLevel.DEBUG)
+            .configure(SampleApplication.instance, WRITE_KEY, Environment.PRODUCTION)
 
         activity_analytics_button_send_screen.setOnClickListener {
             Analytics.instance().page(
