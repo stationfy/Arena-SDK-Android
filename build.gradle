@@ -32,9 +32,9 @@ ext {
     constraintVersion = '1.1.3'
     multidexVersion = '2.0.1'
 
-    realtimedataVersion = '1.19.0'
-    liveblogVersion = '1.15.0'
-    analyticsVersion = '1.11.0'
+    realtimedataVersion = '1.22.0'
+    liveblogVersion = '1.16.0'
+    analyticsVersion = '1.13.0'
 
 
     androidDependencies = [
