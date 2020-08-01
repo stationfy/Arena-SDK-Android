@@ -33,6 +33,6 @@ dependencies {
     implementation rootProject.androidDependencies.multidex
     implementation rootProject.androidDependencies.constraint
     implementation rootProject.androidDependencies.analytics
-    implementation project(":realtime-data")
-    implementation project(":liveblog")
+    implementation rootProject.androidDependencies.liveblog
+    implementation rootProject.androidDependencies.realtimedata
 }

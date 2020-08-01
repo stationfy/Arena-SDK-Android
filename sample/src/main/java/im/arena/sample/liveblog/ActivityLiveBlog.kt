@@ -27,7 +27,9 @@ class ActivityLiveBlog : AppCompatActivity(), LiveBlogCallback {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_live_blog)
-        LiveBlog.configure(SampleApplication.instance, LogLevel.DEBUG, Environment.PRODUCTION)
+        LiveBlog
+            .logLevel(LogLevel.DEBUG)
+            .configure(SampleApplication.instance, Environment.PRODUCTION)
 
         alertDialogLayout =
             LayoutInflater.from(baseContext).inflate(R.layout.alert_dialog_live_blog, null, false)
