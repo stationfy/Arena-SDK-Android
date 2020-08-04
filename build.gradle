@@ -33,7 +33,7 @@ ext {
     multidexVersion = '2.0.1'
 
     realtimedataVersion = '1.25.0'
-    liveblogVersion = '1.22.0'
+    liveblogVersion = '1.23.0'
     analyticsVersion = '1.13.0'
 
 

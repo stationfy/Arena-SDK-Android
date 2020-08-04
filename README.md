@@ -74,7 +74,7 @@ repositories {
 }
 
 dependencies {
-    implementation 'im.arena:liveblog:1.22.0'
+    implementation 'im.arena:liveblog:1.23.0'
 }
 ````
 
