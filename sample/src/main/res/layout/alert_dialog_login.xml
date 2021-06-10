@@ -1,37 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/alert_dialog_live_blog_content_root"
+    android:id="@+id/alert_dialog_login_content_root"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
     <androidx.appcompat.widget.AppCompatEditText
-        android:id="@+id/alert_dialog_live_blog_edit_text_publish_slug"
+        android:id="@+id/alert_dialog_login_edit_text_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/alert_dialog_live_blog_publisher_slug"
+        android:hint="@string/alert_dialog_login_name"
         android:textColor="@android:color/black"
         android:textColorHint="@android:color/black"
         android:textSize="@dimen/text_size_twenty_two" />
 
     <androidx.appcompat.widget.AppCompatEditText
-        android:id="@+id/alert_dialog_live_blog_edit_text_event_slug"
+        android:id="@+id/alert_dialog_login_edit_text_email"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/spacings_twenty_four"
-        android:hint="@string/alert_dialog_live_blog_event_slug"
+        android:hint="@string/alert_dialog_login_email"
         android:textColor="@android:color/black"
         android:textColorHint="@android:color/black"
         android:textSize="@dimen/text_size_twenty_two" />
-
-    <androidx.appcompat.widget.AppCompatSpinner
-        android:id="@+id/alert_dialog_live_blog_spinner_environment"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/chat_spacings_sixteen"
-        android:paddingTop="@dimen/chat_spacings_sixteen"
-        android:paddingBottom="@dimen/chat_spacings_sixteen"
-        android:entries="@array/spinner_environment" />
-
 </androidx.appcompat.widget.LinearLayoutCompat>
 

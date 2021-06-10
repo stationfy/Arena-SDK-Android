@@ -1,12 +1,12 @@
 package im.arena.sample.analytics
 
+import android.app.Application
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import im.arena.analytics.Analytics
 import im.arena.analytics.Environment
 import im.arena.commons.LogLevel
 import im.arena.sample.R
-import im.arena.sample.SampleApplication
 import kotlinx.android.synthetic.main.activity_analytics.*
 
 class ActivityAnalytics : AppCompatActivity() {
@@ -19,7 +19,8 @@ class ActivityAnalytics : AppCompatActivity() {
         setContentView(R.layout.activity_analytics)
         Analytics
             .logLevel(LogLevel.DEBUG)
-            .configure(SampleApplication.instance, WRITE_KEY, Environment.PRODUCTION)
+            .environment(Environment.PRODUCTION)
+            .configure(application, WRITE_KEY)
 
         activity_analytics_button_send_screen.setOnClickListener {
             Analytics.instance().page(

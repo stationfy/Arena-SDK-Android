@@ -2,13 +2,16 @@
 <resources>
 
     <!-- Text Size -->
-    <dimen name="text_size_sixteen">16sp</dimen>
+    <dimen name="chat_text_size_ten">10sp</dimen>
+    <dimen name="chat_text_size_sixteen">16sp</dimen>
     <dimen name="text_size_twenty_two">22sp</dimen>
 
     <!-- Spacing-->
     <dimen name="spacings_two">2dp</dimen>
     <dimen name="spacings_four">4dp</dimen>
-    <dimen name="spacings_ten">10dp</dimen>
-    <dimen name="spacings_sixteen">16dp</dimen>
+    <dimen name="chat_spacings_six">6dp</dimen>
+    <dimen name="chat_spacings_ten">10dp</dimen>
+    <dimen name="chat_spacings_sixteen">16dp</dimen>
+    <dimen name="spacings_twenty_four">24dp</dimen>
 
 </resources>

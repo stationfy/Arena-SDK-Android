@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="im.arena.sample">
 
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
-        android:name=".SampleApplication"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/arena_sample_name"
         android:roundIcon="@mipmap/ic_launcher"
-        android:theme="@style/AppTheme">
+        android:theme="@style/Theme.Sample"
+        tools:replace="android:theme,android:label">
 
         <activity android:name=".ActivityHome">
             <intent-filter>
@@ -23,6 +24,10 @@
             android:configChanges="orientation|screenSize|keyboardHidden" />
 
         <activity android:name=".analytics.ActivityAnalytics" />
+
+        <activity
+            android:name=".chat.ActivityChat"
+            android:theme="@style/Theme.Chat" />
 
         <activity android:name=".service.ActivityServicePlayByPlay" />
 

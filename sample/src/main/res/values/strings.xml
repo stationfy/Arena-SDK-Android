@@ -1,7 +1,20 @@
 <resources>
 
     <string name="arena_sample_name">Arena Im</string>
-    <string name="alert_dialog_live_blog_publisher_slug">What is Publisher Slug?</string>
-    <string name="alert_dialog_live_blog_event_slug">What is Event Slug?</string>
+    <string name="logout">Stop Chating</string>
+    <string name="send">Send</string>
+    <string name="hint_edit_text_message">Type message</string>
+    <string name="request_moderation">Request Moderation</string>
+    <string name="alert_dialog_live_blog_publisher_slug">What is the Publisher Slug?</string>
+    <string name="alert_dialog_live_blog_event_slug">What is the Event Slug?</string>
+    <string name="alert_dialog_chat_write_key">What is the Write Key?</string>
+    <string name="alert_dialog_chat_event_slug">What is the Slug?</string>
+    <string name="alert_dialog_login_name">What iss your name?</string>
+    <string name="alert_dialog_login_email">What is your email?</string>
     <string name="alert_dialog_ok">Ok</string>
+    <string-array name="spinner_environment">
+        <item>DEVELOPMENT</item>
+        <item>PRODUCTION</item>
+    </string-array>
+
 </resources>

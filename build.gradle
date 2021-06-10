@@ -1,5 +1,5 @@
 buildscript {
-    ext.kotlinVersion = '1.3.72'
+    ext.kotlinVersion = '1.4.32'
     repositories {
         google()
         jcenter()
@@ -7,8 +7,8 @@ buildscript {
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.5.3'
-        classpath 'com.google.gms:google-services:4.3.3'
+        classpath 'com.android.tools.build:gradle:4.1.3'
+        classpath 'com.google.gms:google-services:4.3.8'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
     }
 }
@@ -32,20 +32,22 @@ ext {
     constraintVersion = '1.1.3'
     multidexVersion = '2.0.1'
 
-    realtimedataVersion = '1.25.0'
-    liveblogVersion = '1.23.0'
-    analyticsVersion = '1.13.0'
+    realtimedataVersion = '1.34.0'
+    liveblogVersion = '1.28.0'
+    analyticsVersion = '1.20.0'
+    chatVersion = '1.0.0'
 
 
     androidDependencies = [
-            kotlin       : "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlinVersion",
-            appCompat    : "androidx.appcompat:appcompat:$appCompatVersion",
-            material     : "com.google.android.material:material:$materialVersion",
-            constraint   : "androidx.constraintlayout:constraintlayout:$constraintVersion",
-            multidex     : "androidx.multidex:multidex:$multidexVersion",
-            realtimedata : "im.arena:realtimedata:$realtimedataVersion",
-            liveblog     : "im.arena:liveblog:$liveblogVersion",
-            analytics    : "im.arena:analytics:$analyticsVersion",
+            kotlin      : "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlinVersion",
+            appCompat   : "androidx.appcompat:appcompat:$appCompatVersion",
+            material    : "com.google.android.material:material:$materialVersion",
+            constraint  : "androidx.constraintlayout:constraintlayout:$constraintVersion",
+            multidex    : "androidx.multidex:multidex:$multidexVersion",
+            realtimedata: "im.arena:realtimedata:$realtimedataVersion",
+            chat        : "im.arena:chat:$chatVersion",
+            liveblog    : "im.arena:liveblog:$liveblogVersion",
+            analytics   : "im.arena:analytics:$analyticsVersion",
 
     ]
 }

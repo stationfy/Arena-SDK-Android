@@ -1,11 +1,26 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.MaterialComponents.Light.DarkActionBar">
+    <style name="Theme.Sample" parent="Theme.MaterialComponents.Light.DarkActionBar">
         <item name="colorPrimary">@color/daisy_bush</item>
         <item name="colorPrimaryDark">@color/daisy_bush_dark</item>
         <item name="colorAccent">@color/daisy_bush</item>
     </style>
 
+    <style name="Theme.Chat" parent="Theme.Sample">
+        <item name="windowActionBar">false</item>
+        <item name="android:windowNoTitle">true</item>
+    </style>
+
+    <style name="ActivityChat.Button.Retry" parent="LiveBlog.Button.Normal.Outline.Alto">
+        <item name="android:visibility">gone</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:text">@string/chat_activity_button_retry</item>
+        <item name="android:minWidth">@dimen/live_blog_spacings_three_hundred</item>
+    </style>
+
+    <style name="ShapeAppearanceOverlay.App.CornerSize50Percent" parent="">
+        <item name="cornerSize">50%</item>
+    </style>
 
 </resources>

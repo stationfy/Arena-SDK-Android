@@ -3,8 +3,12 @@
 
     <color name="daisy_bush">#5B2B94</color>
     <color name="daisy_bush_dark">#3E0B7A</color>
-    <color name="white_alpha">#7FFFFFFF</color>
+    <color name="white_alpha">#7F0E322B</color>
     <color name="dusty_gray">#9B9B9B</color>
+    <color name="black_transparent">#4D0E322B</color>
     <color name="blog_alto">#dcdcdc</color>
+    <color name="dodger_blue">#2196f3</color>
+    <color name="eucalyptus">#248a52</color>
+    <color name="red">#f00000</color>
 
 </resources>

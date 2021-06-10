@@ -43,7 +43,7 @@ class ActivityServicePlayByPlay : AppCompatActivity() {
         RealTimeData
             .instance()
             .cachedRepository
-            .load(PUBLISHER_SLUG, EVENT_SLUG_GENERAL)
+            .live(PUBLISHER_SLUG, EVENT_SLUG_GENERAL)
             .subscribe(
                 {
                     loadStreaming(it.eventInfo?.key)

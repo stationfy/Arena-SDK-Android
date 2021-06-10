@@ -25,6 +25,12 @@ android {
     kotlinOptions {
         jvmTarget = JavaVersion.VERSION_1_8.toString()
     }
+
+    buildFeatures {
+        viewBinding {
+            enabled true
+        }
+    }
 }
 
 dependencies {
@@ -34,5 +40,6 @@ dependencies {
     implementation rootProject.androidDependencies.constraint
     implementation rootProject.androidDependencies.analytics
     implementation rootProject.androidDependencies.liveblog
+    implementation rootProject.androidDependencies.chat
     implementation rootProject.androidDependencies.realtimedata
 }
