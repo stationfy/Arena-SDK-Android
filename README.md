@@ -133,7 +133,7 @@ tools available at the Arena Dashboard.
 
 #### Step 1: Install the Chat SDK
 
-Installing the Chat SDK is simple if you’re familiar with using external libraries or SDKs. To install the Live Blog SDK using `Gradle`, add the following lines to a `build.gradle` file at the app level.
+Installing the Chat SDK is simple if you’re familiar with using external libraries or SDKs. To install the Chat SDK using `Gradle`, add the following lines to a `build.gradle` file at the app level.
 
 ```groovy
 repositories {
