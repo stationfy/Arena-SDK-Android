@@ -4,6 +4,7 @@ Integrate live blog, analytics and real time data services into your Android cli
 - [Requirements](#requirements)
 - [Sample](#sample)
 - [LiveBlog](#liveblog)
+- [Chat](#chat)
 - [Analytics](#analytics)
 - [RealTimeData](#realtimedata)
 - [Getting Help](#help)
@@ -74,7 +75,7 @@ repositories {
 }
 
 dependencies {
-    implementation 'im.arena:liveblog:1.23.0'
+    implementation 'im.arena:liveblog:1.27.0'
 }
 ````
 
@@ -119,6 +120,106 @@ live_blog.start(PUBLISH_SLUG, EVENT_SLUG, LIFECYCLE_OWNER, CLICK_LISTENER)
 *  `CLICK_LISTENER`: Interface definition for a callback to be invoked when a view is clicked.
 
 
+<a name="chat"></a>
+# Chat
+
+Arena provides a ready-to-use live group chat activity that doesn't require  
+any development effort and it can power many of the common scenarios.  
+For more complex use-cases we made available the Kotlin SDK that  
+provides the infra-structure necessary to build your own chat experience  
+and at the same time leverage the powerful moderation and backoffice  
+tools available at the Arena Dashboard.
+
+
+#### Step 1: Install the Chat SDK
+
+Installing the Chat SDK is simple if you’re familiar with using external libraries or SDKs. To install the Live Blog SDK using `Gradle`, add the following lines to a `build.gradle` file at the app level.
+
+```groovy
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'im.arena:chat:1.0.0'
+}
+````
+
+#### Step 2: Configure ProGuard to shrink code and resources
+When you build your APK with minifyEnabled true, add the following line to the module's ProGuard rules file.
+```gradle
+-keep class im.arena.chat.** { *; }
+-keep class im.arena.analytics.** { *; }
+-keep class im.arena.commons.** { *; }
+-keep class im.arena.realtimedata.** { *; }
+```
+
+
+#### Step 3: Setup SDK
+Initialization links the SDK to the Android context, allowing you to respond to connection and status changes.
+The ChatActivity.configure() method must be called once across your Android client app. It is recommended to initialize the in the onCreate() method of the Application instance.
+
+```kotlin
+ChatActivity
+    .logLevel(LogLevel.DEBUG)
+    .environment(environment)
+    .configure(application, writeKey, slug)
+```
+*  `APPLICATION`: Base class for maintaining global application state.
+*  `WRITE_KEY`: The write key is the one used to initialize the SDK and will be provided by Arena team
+*  `SLUG`: Base class for maintaining global application state.
+
+
+To initialize the SDK you'll need your site slug and a chat room slug and both can be obtained from the Arena Dashboard or using the Platform API.
+
+You can find your site slug in the dashboard settings: https://dashboard.arena.im/settings/site.
+
+##### Article
+![Chat](showcase/Chat.png)
+
+#### Step 5: Start SDK
+To initialize the sdk it is necessary called:
+
+```kotlin
+ChatActivity
+    .start(activity, activityLauncher)
+```
+*  `ACTIVITY`: Scope of current running screen.
+*  `ACTIVITY_RESULT_LAUNCHER`: A launcher for a previously-ActivityResultCaller#registerForActivityResult to start the process of executing an ActivityResultContract.
+
+Or
+
+```kotlin
+ChatActivity
+    .start(fragment, activityLauncher)
+```
+*  `FRAGMENT`: Scope of current running screen.
+*  `ACTIVITY_RESULT_LAUNCHER`: A launcher for a previously-ActivityResultCaller#registerForActivityResult to start the process of executing an ActivityResultContract.
+
+
+#### Step 6: Singe Sign On
+Chat allows the product to have its own SSO login flow. Users can now enter  
+the chat while logged in. This requires the SDK client, the user data calling:
+
+```kotlin
+ChatViewModel.externalUser(  
+    ExternalUser(id, name, email, image, familyName, givenName, extras)  
+)
+```
+
+If the chat is started in anonymous mode and the user chooses to login with SSO, the ActivityResultCallback sent in SDK start will be called for the client to call its login flow
+```kotlin
+private val activityResultCallback = ActivityResultCallback<ActivityResult> {
+    if (it.resultCode == RESULT_FIRST_USER) {
+        ChatViewModel.externalUser(
+            ExternalUser(id, name, email, image, familyName, givenName, extras)  
+        )
+         
+        ChatActivity.start(this, activityLauncher)
+    }
+}
+```
+
 <a name="analytics"></a>
 # Analytics
 
@@ -135,7 +236,7 @@ repositories {
 }
 
 dependencies {
-    implementation 'im.arena:analytics:1.13.0'
+    implementation 'im.arena:analytics:1.18.0'
 }
 ````
 
@@ -149,13 +250,16 @@ When you build your APK with minifyEnabled true, add the following line to the m
 
 
 #### Step 3 : Setup SDK
-The `Analytics.configure(application, writeKey, environment)` method must be called once across your Android client app. It is recommended to initialize the in the onCreate() method of the Application instance.
+The `Analytics.configure()` method must be called once across your Android client app. It is recommended to initialize the in the onCreate() method of the Application instance.
 
 ```kotlin
-Analytics.configure(APPLICATION, WRITE_KEY)
+Analytics
+    .environment(Environment.PRODUCTION)
+    .logLevel(LogLevel.NONE)
+    .configure(CONTEXT, WRITE_KEY)
 ```
 
-*  `APPLICATION`: Base class for maintaining global application state.
+*  `CONTEXT`: Base class for maintaining global application state.
 *  `WRITE_KEY`: The write key is the one used to initialize the SDK and will be provided by Arena team
 
 
@@ -236,7 +340,7 @@ repositories {
 }
 
 dependencies {
-    implementation 'im.arena:realtimedata:1.24.0'
+    implementation 'im.arena:realtimedata:1.29.0'
 }
 ````
 
@@ -252,30 +356,15 @@ Initialization links the SDK to the Android context, allowing you to respond to 
 The RealTimeData.setup() method must be called once across your Android client app. It is recommended to initialize the in the onCreate() method of the Application instance.
 
 ```kotlin
-RealTimeData.configure(APPLICATION)
+RealTimeData
+    .environment(Environment.PRODUCTION)
+    .logLevel(LogLevel.NONE)
+    .configure(CONTEXT)
 ```
-*  `APPLICATION`: Base class for maintaining global application state.
+*  `CONTEXT`: Base class for maintaining global application state.
+
 
 The real time data service offers some alternatives for customers to consume data:
-
-###### SNAPSHOTS
-Returns a list of raw data
-
-```kotlin
- RealTimeData
-            .playByPlay
-            .snapshots(
-                QUERY,
-                { success->
-                },
-                { error->
-                }, PER_PAGE
-            )
-```
-
-*  `QUERY`: Query to request the information provided through the method `RealTimeData.playByPlay.query(EVENT_KEY)`
-*  `PER_PAGE`: Number of items per page
-
 
 ###### REALTIME
 Real time data listener
