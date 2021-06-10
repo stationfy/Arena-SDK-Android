@@ -17,6 +17,23 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
+    signingConfigs {
+        release {
+            storeFile file(STORE_FILE_DEBUG)
+            keyAlias KEY_ALIAS_DEBUG
+            storePassword STORE_PASSWORD_DEBUG
+            keyPassword KEY_PASSWORD_DEBUG
+        }
+
+        debug {
+            storeFile file(STORE_FILE_DEBUG)
+            keyAlias KEY_ALIAS_DEBUG
+            storePassword STORE_PASSWORD_DEBUG
+            keyPassword KEY_PASSWORD_DEBUG
+        }
+    }
+
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
