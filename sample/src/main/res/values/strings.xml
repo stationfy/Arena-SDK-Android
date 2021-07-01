@@ -1,6 +1,7 @@
 <resources>
 
     <string name="arena_sample_name">Arena Im</string>
+    <string name="button_retry">Retry</string>
     <string name="logout">Stop Chating</string>
     <string name="send">Send</string>
     <string name="hint_edit_text_message">Type message</string>

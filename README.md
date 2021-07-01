@@ -141,7 +141,7 @@ repositories {
 }
 
 dependencies {
-    implementation 'im.arena:chat:1.0.0'
+    implementation 'im.arena:chat:1.1.0'
 }
 ````
 
@@ -156,68 +156,90 @@ When you build your APK with minifyEnabled true, add the following line to the m
 
 
 #### Step 3: Setup SDK
-Initialization links the SDK to the Android context, allowing you to respond to connection and status changes.
-The ChatActivity.configure() method must be called once across your Android client app. It is recommended to initialize the in the onCreate() method of the Application instance.
-
-```kotlin
-ChatActivity
-    .logLevel(LogLevel.DEBUG)
-    .environment(environment)
-    .configure(application, writeKey, slug)
-```
-*  `APPLICATION`: Base class for maintaining global application state.
-*  `WRITE_KEY`: The write key is the one used to initialize the SDK and will be provided by Arena team
-*  `SLUG`: Base class for maintaining global application state.
-
-
 To initialize the SDK you'll need your site slug and a chat room slug and both can be obtained from the Arena Dashboard or using the Platform API.
 
 You can find your site slug in the dashboard settings: https://dashboard.arena.im/settings/site.
 
-##### Article
+To access the chat room slug, go to the [chat list page](https://dashboard.arena.im/chatlist), find the chat and take the last route param as in the example below:
+
 ![Chat](showcase/Chat.png)
 
-#### Step 5: Start SDK
-To initialize the sdk it is necessary called:
+After retrieving the site slug and chat slug, it is necessary to call Chat.configure(). The  method must be called once across your Android client app. It is recommended to initialize the in the onCreate() method of the Application instance.
 
 ```kotlin
-ChatActivity
-    .start(activity, activityLauncher)
+Chat.configure(application, writeKey, slug)
 ```
-*  `ACTIVITY`: Scope of current running screen.
-*  `ACTIVITY_RESULT_LAUNCHER`: A launcher for a previously-ActivityResultCaller#registerForActivityResult to start the process of executing an ActivityResultContract.
+*  [APPLICATION](https://developer.android.com/reference/android/app/Application): Base class for maintaining global application state.
+*  [WRITE_KEY](https://dashboard.arena.im/settings/site): Account identifier
+*  [SLUG](https://dashboard.arena.im/settings/site): Chat identifier
 
-Or
+The chat has additional settings that allow customers to be able to see the event logs on the terminal, as well as change the environment that is running:
+```kotlin
+Chat
+    .environment(environment)
+    .logLevel(LogLevel.DEBUG)
+    .configure(application, writeKey, slug)
+```
+
+#### Step 5: Start Chat
+To start the chat it is necessary to call:
 
 ```kotlin
-ChatActivity
-    .start(fragment, activityLauncher)
+Chat.newInstance()
 ```
-*  `FRAGMENT`: Scope of current running screen.
-*  `ACTIVITY_RESULT_LAUNCHER`: A launcher for a previously-ActivityResultCaller#registerForActivityResult to start the process of executing an ActivityResultContract.
+
+The chat internally extends Android's [Fragment](https://developer.android.com/guide/fragments), which allows customers to add and customize the screen on which the chat is embedded.
+For this, you need to add the chat to a view of your application, for example:
+
+```kotlin
+supportFragmentManager
+    .beginTransaction()
+    .replace(R.id.container,fragment)
+    .commitAllowingStateLoss()
+```
+
+After these steps, the chat is up and running in your app.
 
 
 #### Step 6: Singe Sign On
-Chat allows the product to have its own SSO login flow. Users can now enter  
-the chat while logged in. This requires the SDK client, the user data calling:
+Chat allows the product to have its own SSO login flow. Users can now enter the chat while logged in. You can start the chat with a logged in user, just call:
 
 ```kotlin
-ChatViewModel.externalUser(  
-    ExternalUser(id, name, email, image, familyName, givenName, extras)  
+Chat.loggedUser(  
+    ExternalUser(id, name, email, image, firstName, lastName)  
 )
 ```
 
-If the chat is started in anonymous mode and the user chooses to login with SSO, the ActivityResultCallback sent in SDK start will be called for the client to call its login flow
+*  `id`: unique user identifier.
+*  `name`: full username.
+*  `email`: user email.
+*  `image`: user profile picture.
+*  `firstName`: user name.
+*  `lastName`: your family's last name.
+
+
+For example:
 ```kotlin
-private val activityResultCallback = ActivityResultCallback<ActivityResult> {
-    if (it.resultCode == RESULT_FIRST_USER) {
-        ChatViewModel.externalUser(
-            ExternalUser(id, name, email, image, familyName, givenName, extras)  
+Chat
+    .loggedUser(
+        ExternalUser("123123","Roberto", "roberto@gmail.com",
+            "https://randomuser.me/api/portraits/women/","Silva","Lima"
         )
-         
-        ChatActivity.start(this, activityLauncher)
+    )
+```
+
+
+If the chat is started in incognito mode and the user chooses to login with SSO, an event will be sent via [LiveData](https://developer.android.com/topic/libraries/architecture/livedata?hl=pt-br) with the value Events.SSO, indicating that you should start your login flow in the app.
+```kotlin
+ private fun observeEvents() {
+        Chat.liveDataEvents().observe(this) { events: Events ->
+            when (events) {
+                Events.SSO_REQUIRED -> {
+                    Chat.loggedUser(ExternalUser(id, name, email, image, firstName, lastName))
+                }
+            }
+        }
     }
-}
 ```
 
 <a name="analytics"></a>
@@ -340,7 +362,7 @@ repositories {
 }
 
 dependencies {
-    implementation 'im.arena:realtimedata:1.29.0'
+    implementation 'im.arena:realtimedata:1.36.0'
 }
 ````
 
