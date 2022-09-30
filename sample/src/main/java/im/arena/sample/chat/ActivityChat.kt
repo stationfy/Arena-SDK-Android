@@ -20,16 +20,35 @@ import kotlin.random.Random
 
 class ActivityChat : FragmentActivity() {
     private lateinit var activityChatBinding: ActivityChatBinding
+    private lateinit var appCompatEditTextWriteKey: AppCompatEditText
+    private lateinit var appCompatEditTextSlug: AppCompatEditText
+    private lateinit var appCompatSpinnerEnvironment: AppCompatSpinner
     private var alertDialogInput: AlertDialog? = null
+    private val chat by lazy {
+        Chat
+            .logLevel(LogLevel.DEBUG)
+            .environment(
+                if (appCompatSpinnerEnvironment.selectedItemPosition == 0)
+                Environment.DEVELOPMENT
+                else Environment.PRODUCTION
+            )
+            .apply {
+                configure(
+                    application,
+                    appCompatEditTextWriteKey.text.toString(),
+                    appCompatEditTextSlug.text.toString()
+                )
+            }
+            .newInstance()
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(ActivityChatBinding
-            .inflate(layoutInflater)
-            .run {
-                activityChatBinding = this
-                activityChatBinding.root
-            })
+        setContentView(
+            ActivityChatBinding
+                .inflate(layoutInflater)
+                .also { activityChatBinding = it }
+                .root)
 
         observeEvents()
 
@@ -39,9 +58,6 @@ class ActivityChat : FragmentActivity() {
     }
 
     private fun showAlertDialogChat() {
-        lateinit var appCompatEditTextWriteKey: AppCompatEditText
-        lateinit var appCompatEditTextSlug: AppCompatEditText
-        lateinit var appCompatSpinnerEnvironment: AppCompatSpinner
 
         val view =
             LayoutInflater.from(baseContext).inflate(R.layout.alert_dialog_chat, null, false)
@@ -57,29 +73,13 @@ class ActivityChat : FragmentActivity() {
                 }
 
         alertDialogInput = alertDialog(view) { dialogInterface, _ ->
-            val environment =
-                if (appCompatSpinnerEnvironment.selectedItemPosition == 0)
-                    Environment.DEVELOPMENT else Environment.PRODUCTION
-
-            val fragment = Chat
-                .logLevel(LogLevel.DEBUG)
-                .environment(environment)
-                .apply {
-                    configure(
-                        application,
-                        appCompatEditTextWriteKey.text.toString(),
-                        appCompatEditTextSlug.text.toString()
-                    )
-                }
-                .newInstance()
-
-            supportFragmentManager
-                .beginTransaction()
-                .replace(
-                    R.id.activity_chat_container,
-                    fragment
-                )
-                .commitAllowingStateLoss()
+        supportFragmentManager
+            .beginTransaction()
+            .replace(
+                R.id.activity_chat_container,
+                chat
+            )
+            .commitAllowingStateLoss()
 
             dialogInterface.dismiss()
         }
@@ -111,6 +111,7 @@ class ActivityChat : FragmentActivity() {
                         )
 
                 }
+                else -> {}
             }
         }
     }

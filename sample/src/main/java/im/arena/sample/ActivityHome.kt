@@ -8,9 +8,9 @@ import androidx.appcompat.app.AppCompatDelegate
 import androidx.recyclerview.widget.LinearLayoutManager
 import im.arena.sample.analytics.ActivityAnalytics
 import im.arena.sample.chat.ActivityChat
+import im.arena.sample.databinding.ActivityHomeBinding
 import im.arena.sample.liveblog.ActivityLiveBlog
 import im.arena.sample.service.ActivityServicePlayByPlay
-import kotlinx.android.synthetic.main.activity_home.*
 
 class ActivityHome : AppCompatActivity(), AdapterHome.OnClickListener {
     companion object {
@@ -18,6 +18,8 @@ class ActivityHome : AppCompatActivity(), AdapterHome.OnClickListener {
             AppCompatDelegate.setCompatVectorFromResourcesEnabled(true)
         }
     }
+
+    private var activityHomeBinding: ActivityHomeBinding? = null
 
     private val componentsList: List<String> = listOf(
         "Live Blog",
@@ -28,12 +30,20 @@ class ActivityHome : AppCompatActivity(), AdapterHome.OnClickListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_home)
+        setContentView(ActivityHomeBinding
+            .inflate(layoutInflater)
+            .also { activityHomeBinding = it }
+            .root)
 
-        recycler_view_home.apply {
+        activityHomeBinding?.recyclerViewHome?.apply {
             layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
             adapter = AdapterHome(componentsList, this@ActivityHome)
         }
+    }
+
+    override fun onDestroy() {
+        activityHomeBinding = null
+        super.onDestroy()
     }
 
     override fun click(view: View?, position: Int) {

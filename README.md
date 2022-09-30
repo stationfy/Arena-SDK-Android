@@ -1,4 +1,4 @@
-# Arena Android SDK [![Build Status](https://app.bitrise.io/app/c35ffcea29b2e8a6/status.svg?token=rvvsR_ZUm7c2qOh4Vd58iw&branch=develop)](https://app.bitrise.io/app/c35ffcea29b2e8a6)
+# Arena Android SDK
 Integrate live blog, analytics and real time data services into your Android client applications with speed and efficiency. Our Android SDK helps you focus on the client's implementation of booting, configuring live blog and sending events.
 
 - [Requirements](#requirements)
@@ -75,7 +75,7 @@ repositories {
 }
 
 dependencies {
-    implementation 'im.arena:liveblog:1.27.0'
+    implementation 'im.arena:liveblog:1.30.0'
 }
 ````
 
@@ -141,7 +141,7 @@ repositories {
 }
 
 dependencies {
-    implementation 'im.arena:chat:1.1.0'
+    implementation 'im.arena:chat:1.4.0'
 }
 ````
 
@@ -258,7 +258,7 @@ repositories {
 }
 
 dependencies {
-    implementation 'im.arena:analytics:1.18.0'
+    implementation 'im.arena:analytics:1.21.1'
 }
 ````
 
@@ -362,7 +362,7 @@ repositories {
 }
 
 dependencies {
-    implementation 'im.arena:realtimedata:1.36.0'
+    implementation 'im.arena:realtimedata:1.40.0'
 }
 ````
 
@@ -440,7 +440,7 @@ Labels on issues are managed by contributors, you don't have to worry about them
 
 Arena Android SDK is proprietary software, all rights reserved. See the LICENSE file for more info.
 
-Copyright (c) 2020  Arena Im.
+Copyright (c) 2022  Arena Im.
 
 
 [1]: https://github.com/stationfy/Arena-SDK-Android-demo/issues

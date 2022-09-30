@@ -1,60 +1,106 @@
 package im.arena.sample.liveblog
 
+import android.app.Application
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatEditText
+import androidx.appcompat.widget.AppCompatSpinner
 import im.arena.commons.LogLevel
 import im.arena.liveblog.LiveBlog
+import im.arena.liveblog.commons.LiveBlogCallback
 import im.arena.realtimedata.Environment
+import im.arena.realtimedata.RealTimeData
 import im.arena.sample.R
-import im.arena.sample.SampleApplication
 import im.arena.sample.common.alertDialog
-import kotlinx.android.synthetic.main.activity_live_blog.*
+import im.arena.sample.databinding.ActivityLiveBlogBinding
 
 
-class ActivityLiveBlog : AppCompatActivity() {
+class ActivityLiveBlog : AppCompatActivity(), LiveBlogCallback {
+    companion object {
+        private const val PUBLISHER_SLUG = "qa-sdk"
+        private const val EVENT_SLUG_GENERAL = "buly"
+        private const val EVENT_SLUG_GOLF = "fw8i"
+        private const val EVENT_SLUG_SOCCER = "yjsv"
+        private const val EVENT_SLUG_BASEBALL = "zrcz"
+        private const val EVENT_SLUG_BASKETBALL = "wza0"
+        private const val EVENT_SLUG_MOTOSPORT = "m4iy"
+        private const val EVENT_SLUG_MIDIA = "cvz7"
+    }
+
+    private var activityLiveBlogBinding: ActivityLiveBlogBinding? = null
     private var alertDialogInput: AlertDialog? = null
-    private lateinit var alertDialogLayout: View
     private lateinit var appCompatEditTextPublisherSlug: AppCompatEditText
     private lateinit var appCompatEditTextEventSlug: AppCompatEditText
+    private lateinit var appCompatSpinnerEventEntries: AppCompatSpinner
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_live_blog)
+        setContentView(
+            ActivityLiveBlogBinding
+                .inflate(layoutInflater)
+                .also { activityLiveBlogBinding = it }
+                .root)
 
-
-        alertDialogLayout =
-            LayoutInflater.from(baseContext).inflate(R.layout.alert_dialog_live_blog, null, false)
-        appCompatEditTextPublisherSlug =
-            alertDialogLayout.findViewById(R.id.alert_dialog_live_blog_edit_text_publish_slug)
-        appCompatEditTextEventSlug =
-            alertDialogLayout.findViewById(R.id.alert_dialog_live_blog_edit_text_event_slug)
-
-        showAlertDialogLiveBlog(live_blog)
+        if (savedInstanceState == null) {
+            showAlertDialogLiveBlog(activityLiveBlogBinding?.liveBlog)
+        }
     }
 
-    private fun showAlertDialogLiveBlog(liveBlog: LiveBlog) {
-        alertDialogInput =
-            alertDialog(alertDialogLayout) { dialogInterface, _ ->
-                LiveBlog
-                    .logLevel(LogLevel.DEBUG)
-                    .environment(Environment.PRODUCTION)
-                    .configure(
-                        SampleApplication.instance,
-                        appCompatEditTextPublisherSlug.text.toString(),
-                        appCompatEditTextEventSlug.text.toString()
-                    )
+    override fun onItemClick(view: View?, position: Int) {
+    }
 
-                liveBlog.start()
-                dialogInterface.dismiss()
-            }
+    override fun onPredictionItemClick(view: View?, position: Int) {
+    }
+
+    override fun onLiveScoreItemClick(view: View?, position: Int) {
+    }
+
+    override fun onItemClick(view: View?, positionParent: Int, positionChild: Int) {
     }
 
     override fun onDestroy() {
         alertDialogInput = null
+        activityLiveBlogBinding = null
         super.onDestroy()
+    }
+
+    private fun showAlertDialogLiveBlog(liveBlog: LiveBlog?) {
+        val view =
+            LayoutInflater.from(baseContext).inflate(R.layout.alert_dialog_live_blog, null, false)
+                .apply {
+                    appCompatEditTextPublisherSlug =
+                        findViewById(R.id.alert_dialog_live_blog_edit_text_publish_slug)
+
+                    appCompatEditTextEventSlug =
+                        findViewById(R.id.alert_dialog_live_blog_edit_text_event_slug)
+
+                    appCompatSpinnerEventEntries =
+                        findViewById(R.id.alert_dialog_live_blog_spinner_environment)
+                }
+
+        alertDialogInput = alertDialog(view) { dialogInterface, _ ->
+            val environment =
+                if (appCompatSpinnerEventEntries.selectedItemPosition == 0)
+                    Environment.PRODUCTION else Environment.DEVELOPMENT
+
+            RealTimeData
+                .logLevel(LogLevel.DEBUG)
+                .configure(applicationContext as Application, environment)
+
+            LiveBlog
+                .logLevel(LogLevel.DEBUG)
+                .environment(environment)
+                .configure(
+                    baseContext.applicationContext as Application,
+                    appCompatEditTextPublisherSlug.text.toString(),
+                    appCompatEditTextEventSlug.text.toString()
+                )
+
+            liveBlog?.start()
+            dialogInterface.dismiss()
+        }
     }
 }

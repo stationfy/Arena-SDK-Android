@@ -1,6 +1,7 @@
 package im.arena.sample.service
 
 import android.annotation.SuppressLint
+import android.app.Application
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
@@ -12,8 +13,9 @@ import im.arena.realtimedata.Environment
 import im.arena.realtimedata.RealTimeData
 import im.arena.realtimedata.model.OrderBy
 import im.arena.sample.R
-import im.arena.sample.SampleApplication
-import kotlinx.android.synthetic.main.activity_service_play_by_play.*
+import im.arena.sample.databinding.ActivityHomeBinding
+import im.arena.sample.databinding.ActivityLiveBlogBinding
+import im.arena.sample.databinding.ActivityServicePlayByPlayBinding
 
 class ActivityServicePlayByPlay : AppCompatActivity() {
     companion object {
@@ -21,16 +23,23 @@ class ActivityServicePlayByPlay : AppCompatActivity() {
         private const val EVENT_SLUG_GENERAL = "buly"
     }
 
+    private var activityServicePlayByPlayBinding: ActivityServicePlayByPlayBinding? = null
+
     private val adapterServicePlayByPlay = AdapterServicePlayByPlay()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_service_play_by_play)
+        setContentView(
+            ActivityServicePlayByPlayBinding
+                .inflate(layoutInflater)
+                .also { activityServicePlayByPlayBinding = it }
+                .root)
+
         RealTimeData
             .logLevel(LogLevel.DEBUG)
-            .configure(SampleApplication.instance, Environment.PRODUCTION)
+            .configure(applicationContext as Application, Environment.PRODUCTION)
 
-        activity_service_play_by_play_recycler_view.apply {
+        activityServicePlayByPlayBinding?.activityServicePlayByPlayRecyclerView?.apply {
             layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
             adapter = adapterServicePlayByPlay
         }
@@ -54,6 +63,11 @@ class ActivityServicePlayByPlay : AppCompatActivity() {
                 })
     }
 
+    override fun onDestroy() {
+        activityServicePlayByPlayBinding = null
+        super.onDestroy()
+    }
+
     @SuppressLint("CheckResult")
     private fun loadStreaming(eventId: String?) {
         RealTimeData
@@ -66,8 +80,8 @@ class ActivityServicePlayByPlay : AppCompatActivity() {
             .subscribe(
                 {
                     adapterServicePlayByPlay.submitList(it)
-                    activity_service_play_by_play_progress.visibility = View.GONE
-                    activity_service_play_by_play_recycler_view.visibility = View.VISIBLE
+                    activityServicePlayByPlayBinding?.activityServicePlayByPlayProgress?.visibility = View.GONE
+                    activityServicePlayByPlayBinding?.activityServicePlayByPlayRecyclerView?.visibility = View.VISIBLE
                 },
                 {
                     makeText(baseContext, it.message, Toast.LENGTH_SHORT)

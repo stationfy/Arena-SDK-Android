@@ -1,35 +1,39 @@
 package im.arena.sample.analytics
 
-import android.app.Application
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import im.arena.analytics.Analytics
 import im.arena.analytics.Environment
 import im.arena.commons.LogLevel
-import im.arena.sample.R
-import kotlinx.android.synthetic.main.activity_analytics.*
+import im.arena.sample.databinding.ActivityAnalyticsBinding
 
 class ActivityAnalytics : AppCompatActivity() {
     companion object {
         private const val WRITE_KEY = "NWU3MjNhMTgwMDE3YmMwMDA3YzgyYTI0Om1vYmlsZTpkZWZhdWx0"
     }
 
+    private var activityAnalyticsBinding: ActivityAnalyticsBinding? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_analytics)
+        setContentView(ActivityAnalyticsBinding
+            .inflate(layoutInflater)
+            .also { activityAnalyticsBinding = it }
+            .root)
+
         Analytics
             .logLevel(LogLevel.DEBUG)
             .environment(Environment.PRODUCTION)
             .configure(application, WRITE_KEY)
 
-        activity_analytics_button_send_screen.setOnClickListener {
+        activityAnalyticsBinding?.activityAnalyticsButtonSendScreen?.setOnClickListener {
             Analytics.instance().page(
                 "Home Activity",
                 hashMapOf(Pair("firstTime", "true"))
             )
         }
 
-        activity_analytics_button_send_track.setOnClickListener {
+        activityAnalyticsBinding?.activityAnalyticsButtonSendTrack?.setOnClickListener {
             Analytics.instance().track(
                 "Post Reacted",
                 hashMapOf(
@@ -39,7 +43,7 @@ class ActivityAnalytics : AppCompatActivity() {
             )
         }
 
-        activity_analytics_button_send_identify.setOnClickListener {
+        activityAnalyticsBinding?.activityAnalyticsButtonSendIdentify?.setOnClickListener {
             Analytics.instance().identify(
                 "jf8sjgnvsia0381",
                 hashMapOf(
@@ -49,6 +53,11 @@ class ActivityAnalytics : AppCompatActivity() {
                 )
             )
         }
+    }
+
+    override fun onDestroy() {
+        activityAnalyticsBinding = null
+        super.onDestroy()
     }
 
 }

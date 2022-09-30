@@ -3,23 +3,23 @@ package im.arena.sample
 import android.view.View
 import androidx.core.content.ContextCompat.getDrawable
 import androidx.recyclerview.widget.RecyclerView
-import kotlinx.android.synthetic.main.view_holder_home.view.*
+import im.arena.sample.databinding.ViewHolderHomeBinding
 
 class ViewHolderHome(
-    private val view: View,
+    view: View,
     private val onClickListener: AdapterHome.OnClickListener
-) :
-    RecyclerView.ViewHolder(view), View.OnClickListener {
+) : RecyclerView.ViewHolder(view), View.OnClickListener {
+    private var viewHolderHomeBinding = ViewHolderHomeBinding.bind(view)
 
     init {
-        with(view.view_holder_home) {
+        viewHolderHomeBinding.viewHolderHome.apply {
             setOnClickListener(this@ViewHolderHome)
             background = getDrawable(itemView.context, R.drawable.ripple_daisy_bush)
         }
     }
 
     fun bind(name: String) {
-        view.view_holder_home_text_view_item.text = name
+        viewHolderHomeBinding.viewHolderHomeTextViewItem.text = name
     }
 
     override fun onClick(view: View?) {

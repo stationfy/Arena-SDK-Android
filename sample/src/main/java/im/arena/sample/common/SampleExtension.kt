@@ -12,7 +12,7 @@ fun Activity.alertDialog(view: View, onClickListener: DialogInterface.OnClickLis
         setView(view)
         setPositiveButton(R.string.alert_dialog_ok, onClickListener)
         setOnCancelListener { it.dismiss() }
-        setCancelable(true)
+        setCancelable(false)
     }.show()
     else null
 
